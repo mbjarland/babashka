@@ -22,6 +22,7 @@
    [clojure.java.io :as io]
    [clojure.string :as str]
    [fipp.edn :as fipp]
+   [clj-yaml.core :as yaml]
    [sci.addons :as addons]
    [sci.core :as sci]
    [sci.impl.interpreter :refer [eval-string*]]
@@ -229,7 +230,8 @@ Everything after that is bound to *command-line-args*."))
     io clojure.java.io
     async clojure.core.async
     csv clojure.data.csv
-    json cheshire.core})
+    json cheshire.core
+    yaml clj-yaml.core})
 
 (def cp-state (atom nil))
 
@@ -259,7 +261,9 @@ Everything after that is bound to *command-line-args*."))
    'clojure.repl {'demunge demunge}
    'clojure.test t/clojure-test-namespace
    'babashka.classpath {'add-classpath add-classpath*}
-   'clojure.pprint {'pprint fipp/pprint}})
+   'clojure.pprint {'pprint fipp/pprint}
+   'clj-yaml.core {'generate-string yaml/generate-string
+                   'parse-string yaml/parse-string}})
 
 (def bindings
   {'java.lang.System/exit exit ;; override exit, so we have more control

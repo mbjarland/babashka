@@ -18,7 +18,8 @@
                  [org.clojure/tools.cli "0.4.2"]
                  [org.clojure/data.csv "1.0.0"]
                  [cheshire "5.10.0"]
-                 [fipp "0.6.22"]]
+                 [fipp "0.6.22"]
+                 [clj-commons/clj-yaml "0.7.0"]]
   :profiles {:test {:dependencies [[clj-commons/conch "0.9.2"]
                                    [com.clojure-goes-fast/clj-async-profiler "0.4.0"]]}
              :uberjar {:global-vars {*assert* false}
