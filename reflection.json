@@ -670,7 +670,7 @@
     "name" : "toString"
   }, {
     "name" : "yield"
-  }]
+  } ]
 }, {
     "name": "oracle.jdbc.driver.T4CDriverExtension",
     "methods": [
