@@ -32,6 +32,13 @@ else
     BABASHKA_LEIN_PROFILES+=",-feature/postgresql"
 fi
 
+if [ "$BABASHKA_FEATURE_ORACLE" = "true" ]
+then
+    BABASHKA_LEIN_PROFILES+=",+feature/oracle"
+else
+    BABASHKA_LEIN_PROFILES+=",-feature/oracle"
+fi
+
 if [ "$BABASHKA_FEATURE_HSQLDB" = "true" ]
 then
     BABASHKA_LEIN_PROFILES+=",+feature/hsqldb"
@@ -75,6 +82,7 @@ else
 fi
 
 if [ -z "$BABASHKA_JAR" ]; then
+	  echo "running with profiles $BABASHKA_LEIN_PROFILES"
     lein with-profiles "$BABASHKA_LEIN_PROFILES,+reflection,-uberjar" do run
     lein with-profiles "$BABASHKA_LEIN_PROFILES" do clean, uberjar
 fi

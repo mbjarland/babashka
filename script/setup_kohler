@@ -1,0 +1,17 @@
+export GRAALVM_HOME=/export/home/atgadmin/bin/babashka/20.2.0.r8.dev-grl
+export BABASHKA_XMX="-J-Xmx8192m"
+
+# included by default
+export BABASHKA_FEATURE_YAML=true
+export BABASHKA_FEATURE_XML=true
+export BABASHKA_FEATURE_CORE_ASYNC=true
+export BABASHKA_FEATURE_CSV=true
+export BABAHSKA_FEATURE_TRANSIT=true
+export BABASHKA_FEATURE_JAVA_TIME=true
+export BABASHKA_FEATURE_JAVA_NIO=true
+
+export BABASHKA_FEATURE_JDBC=true
+export BABASHKA_FEATURE_ORACLE=true
+
+export BABASHKA_FEATURE_HSQLDB=false
+export BABASHKA_FEATURE_POSTGRESQL=false

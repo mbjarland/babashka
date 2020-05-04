@@ -8,6 +8,7 @@
   :license {:name "Eclipse Public License 1.0"
             :url "http://opensource.org/licenses/eclipse-1.0.php"}
   :source-paths ["src" "sci/src" "babashka.curl/src"]
+  :repositories {"local" "file:maven_repository"}
   ;; for debugging Reflector.java code:
   ;; :java-source-paths ["sci/reflector/src-java"]
   :resource-paths ["resources" "sci/resources"]
@@ -26,6 +27,7 @@
              :feature/jdbc {:source-paths ["feature-jdbc"]
                             :dependencies [[seancorfield/next.jdbc "1.0.424"]]}
              :feature/postgresql [:feature/jdbc {:dependencies [[org.postgresql/postgresql "42.2.12"]]}]
+             :feature/oracle     [:feature/jdbc {:dependencies [[com.oracle.jdbc/ojdbc6 "11.2.0.4.0"]]}]
              :feature/hsqldb [:feature/jdbc {:dependencies [[org.hsqldb/hsqldb "2.4.0"]]}]
              :feature/core-async {:source-paths ["feature-core-async"]
                                   :dependencies [[org.clojure/core.async "1.1.587"]]}

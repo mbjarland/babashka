@@ -21,7 +21,7 @@ then
     exit 1
 fi
 
-"$GRAALVM_HOME/bin/gu" install native-image
+#"$GRAALVM_HOME/bin/gu" install native-image
 
 export JAVA_HOME=$GRAALVM_HOME
 
@@ -50,7 +50,8 @@ args=( "-jar" "$BABASHKA_JAR"
        "--no-fallback"
        "--no-server"
        "--report-unsupported-elements-at-runtime"
-       "--initialize-at-run-time=org.postgresql.sspi.SSPIClient"
+       "-H:CCompilerOption=-I/export/home/atgadmin/bin/babashka/zlib-1.2.11" # custom zlib
+       "-H:CLibraryPath=/export/home/atgadmin/bin/babashka/zlib-1.2.11"      # custom zlib
        "$BABASHKA_XMX" )
 
 BABASHKA_STATIC=${BABASHKA_STATIC:-}
@@ -63,6 +64,25 @@ BABASHKA_FEATURE_HSQLDB=${BABASHKA_FEATURE_HSQLDB:-}
 
 if [ "$BABASHKA_FEATURE_HSQLDB" = "true" ]; then
     args+=("-H:IncludeResources=org/hsqldb/.*\.properties" "-H:IncludeResources=org/hsqldb/.*\.sql")
+fi
+
+if [ "$BABASHKA_FEATURE_POSTGRESQL" = "true" ]; then
+    args+=("--initialize-at-run-time=org.postgresql.sspi.SSPIClient")
+fi
+
+if [ "$BABASHKA_FEATURE_ORACLE" = "true" ]; then
+    args+=("-H:IncludeResourceBundles=oracle.net.jdbc.nl.mesg.NLSR,oracle.net.mesg.Message")
+    args+=("-H:ResourceConfigurationFiles=oracle-resources.json")
+    args+=("--allow-incomplete-classpath")
+    args+=("--initialize-at-build-time=oracle.net.jdbc.nl.mesg.NLSR_en")
+    args+=("--initialize-at-build-time=oracle.jdbc.driver.DynamicByteArray")
+    args+=("--initialize-at-build-time=oracle.sql.ConverterArchive")
+    args+=("--initialize-at-build-time=oracle.sql.converter.CharacterConverterJDBC")
+    args+=("--initialize-at-build-time=oracle.sql.converter.CharacterConverter1Byte")
+    args+=("--initialize-at-run-time=oracle.jdbc.driver.OracleTimeoutThreadPerVM")
+    args+=("--initialize-at-run-time=oracle.sql.LnxLibServer")
+    args+=("--initialize-at-run-time=oracle.sql.LoadCorejava")
+    #args+=("--initialize-at-run-time=java.sql.DriverManager")
 fi
 
 BABASHKA_LEAN=${BABASHKA_LEAN:-}

@@ -79,7 +79,8 @@
                                         :parameterTypes ["org.hsqldb.Database"]}]}
                             `java.util.ResourceBundle
                             {:methods [{:name "getBundle"
-                                        :parameterTypes ["java.lang.String","java.util.Locale","java.lang.ClassLoader"]}]})))
+                                        :parameterTypes ["java.lang.String","java.util.Locale","java.lang.ClassLoader"]}]})
+    ))
 
 (def classes
   `{:all [clojure.lang.ExceptionInfo
